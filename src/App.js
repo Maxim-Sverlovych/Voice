@@ -1,25 +1,30 @@
 import React, { useEffect } from "react"
 import alanBtn from "@alan-ai/alan-sdk-web"
+import voiceKey from './services/environment'
+import Container from 'react-bootstrap/Container'
 
-const voiceKey = 'd1ddda4a13d91a5c9dc9398e019d867b2e956eca572e1d8b807a3e2338fdd0dc/stage'
+import './App.css'
+import { ReactComponent as VoiceLogo } from './logo_1.svg'
 
 const App = () => {
-
     useEffect(() => {
         alanBtn({
             key: voiceKey,
-            onCommand: ({ command }) => {
-                if (command === 'testCommand') {
-                    alert('this code was executed')
+            onCommand: ({ command, articles }) => {
+                if (command === 'newHeadlines') {
+                   console.log(articles)
                 }
             }
         })
     }, [])
 
     return (
-        <div>
-            <h1 style={{ textAlign: "center" }}>Ask anything...</h1>
-        </div>
+        <Container className="header">
+            <div className="header-logo">
+                <VoiceLogo />
+                <h1 className="title">VOICE</h1>
+            </div>
+        </Container>
     )
 }
 
